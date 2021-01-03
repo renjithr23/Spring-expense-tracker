@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.repositories.AccountRepository;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 
 
@@ -30,10 +31,14 @@ class PersonServiceImplTest {
 	@Mock
 	PersonRepository personRepository;
 	
+	@Mock
+	AccountRepository accountRepository;
+	
 	
 	@BeforeEach
     public void setUp() throws Exception {
-        personService = new PersonServiceImpl(personRepository);
+		AccountServiceImpl accountService = new AccountServiceImpl(accountRepository);
+        personService = new PersonServiceImpl(personRepository, accountService);
     }
 
 	@Test

@@ -1,9 +1,10 @@
 package com.renj1thr.expensetracker.services;
 
-import java.util.List;
-
 import com.renj1thr.expensetracker.domains.Account;
+import com.renj1thr.expensetracker.domains.Person;
 
 public interface AccountService {
-	List<Account> getAccounts(Long id);
+	
+	Account addAccount(Account account, Person person);
+	
 }

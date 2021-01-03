@@ -16,9 +16,11 @@ import com.renj1thr.expensetracker.repositories.PersonRepository;
 public class PersonServiceImpl implements PersonService {
 	
 	private final PersonRepository personRepository;
+	private final AccountService accountService;
 	
-	public PersonServiceImpl(PersonRepository personRepository) {
+	public PersonServiceImpl(PersonRepository personRepository, AccountService accountService) {
 		this.personRepository = personRepository;
+		this.accountService = accountService;
 	}
 
 	@Override
@@ -57,7 +59,26 @@ public class PersonServiceImpl implements PersonService {
 		return person;
 	}
 	
+	@Override
+	public List<Account> getAccounts(long id){
+		Person person = this.getPersonById(id);
+		
+		List<Account> accountList = new ArrayList<Account>();
+		
+		person.getAccounts().iterator().forEachRemaining(accountList::add);
+		
+		return accountList;
+	}
 	
+	@Override
+	public Account addAccount(Account account, long id) {
+		Person person = this.getPersonById(id);
+		
+		account = accountService.addAccount(account, person);
+		
+		return account; 
+		
+	}
 	
 	
 }

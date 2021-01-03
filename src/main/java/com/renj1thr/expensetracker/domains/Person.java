@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -17,7 +18,10 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
+	@NotBlank(message = "The firstname field should not be blank ")
 	private String firstName;
+	
+	@NotBlank(message = "The lastname field should not be blank")
 	private String lastName;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "person")

@@ -2,9 +2,9 @@ package com.renj1thr.expensetracker.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.renj1thr.expensetracker.domains.Account;
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.repositories.AccountRepository;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,11 +31,14 @@ class AccountServiceImplTest {
 	@Mock
 	PersonRepository personRepository;
 	
+	@Mock
+	AccountRepository accountRepository; 
+	
 	
 	@BeforeEach
 	public void setUp() throws Exception{
-		personService = new PersonServiceImpl(personRepository);
-		accountService = new AccountServiceImpl(personService);
+		accountService = new AccountServiceImpl(accountRepository);
+		personService = new PersonServiceImpl(personRepository, accountService);
 	}
 
 	@Test
@@ -59,7 +63,7 @@ class AccountServiceImplTest {
 		
 //		Tests 
 		
-		List<Account> returnedAccounts = accountService.getAccounts(1L);
+		List<Account> returnedAccounts = personService.getAccounts(1L);
 		assertEquals(returnedAccounts.size(), 2);
 		verify(personRepository,times(1)).findById(anyLong());
 		

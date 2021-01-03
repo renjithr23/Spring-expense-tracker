@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -20,9 +21,13 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private double balance;
+	private double balance = 0;
+	
+	@NotBlank(message = "The name for an Account should not be blank")
 	private String name;
 	private String description;
+	
+	@NotBlank(message = "The Type for an Account should not be blank")
 	private String type;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")

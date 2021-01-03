@@ -1,28 +1,38 @@
 package com.renj1thr.expensetracker.services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.renj1thr.expensetracker.domains.Account;
+import com.renj1thr.expensetracker.domains.Expense;
+import com.renj1thr.expensetracker.domains.Income;
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.repositories.AccountRepository;
 
 @Service
 public class AccountServiceImpl implements AccountService{
-	private final PersonService personService;
-
-	public AccountServiceImpl(PersonService personService) {
-		this.personService = personService;
+	
+	public final AccountRepository accountRepository;
+	
+	public AccountServiceImpl(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
 	}
 	
 	@Override
-	public List<Account> getAccounts(Long id){
+	public Account addAccount(Account account, Person person){
 		
-		List<Account> accountList = new ArrayList<Account>();
-		Person person = personService.getPersonById(id);
-		person.getAccounts().iterator().forEachRemaining(accountList::add);
+//		Doesn't allow a account to be created with negative balance
+		if(account.getBalance() < 0) account.setBalance(0);
 		
-		return accountList;
+		account.setDescription("");
+		account.setIncomes(new ArrayList<Income>());
+		account.setExpenses(new ArrayList<Expense>());
+		account.setPerson(person);
+		
+		account = accountRepository.save(account);
+
+		return account;
+		
 	}
 }
