@@ -27,6 +27,8 @@ import com.renj1thr.expensetracker.repositories.PersonRepository;
 class PersonServiceImplTest {
 	
 	PersonServiceImpl personService;
+	IncomeServiceImpl incomeService;
+	ExpenseServiceImpl expenseService;
 	
 	@Mock
 	PersonRepository personRepository;
@@ -37,7 +39,7 @@ class PersonServiceImplTest {
 	
 	@BeforeEach
     public void setUp() throws Exception {
-		AccountServiceImpl accountService = new AccountServiceImpl(accountRepository);
+		AccountServiceImpl accountService = new AccountServiceImpl(accountRepository, expenseService, incomeService);
         personService = new PersonServiceImpl(personRepository, accountService);
     }
 

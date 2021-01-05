@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -15,8 +16,10 @@ public class Income {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull(message = "A Valid Amount for Income should be present")
 	private double amount;
 	private String description; 
+	@NotNull(message = "The Valid Type for Income should be present")
 	private String type;
 	
 	@ManyToOne

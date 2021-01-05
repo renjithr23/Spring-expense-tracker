@@ -27,6 +27,8 @@ import com.renj1thr.expensetracker.domains.Person;
 import com.renj1thr.expensetracker.repositories.AccountRepository;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 import com.renj1thr.expensetracker.services.AccountServiceImpl;
+import com.renj1thr.expensetracker.services.ExpenseServiceImpl;
+import com.renj1thr.expensetracker.services.IncomeServiceImpl;
 import com.renj1thr.expensetracker.services.PersonServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,6 +36,8 @@ public class PersonControllerTest {
 	
 	PersonServiceImpl personService;
 	AccountServiceImpl accountService;
+	IncomeServiceImpl incomeService;
+	ExpenseServiceImpl expenseService;
 	
 	@Mock
 	PersonController personController;
@@ -48,7 +52,7 @@ public class PersonControllerTest {
 	
 	@BeforeEach
     public void setUp() throws Exception {
-		AccountServiceImpl accountService = new AccountServiceImpl(accountRepository);
+		AccountServiceImpl accountService = new AccountServiceImpl(accountRepository, expenseService, incomeService);
         personService = new PersonServiceImpl(personRepository, accountService);
         
         personController = new PersonController(personService);

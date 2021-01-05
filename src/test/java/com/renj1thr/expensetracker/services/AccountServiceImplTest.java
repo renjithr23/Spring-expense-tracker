@@ -27,6 +27,8 @@ class AccountServiceImplTest {
 
 	AccountServiceImpl accountService;
 	PersonServiceImpl personService;
+	IncomeServiceImpl incomeService;
+	ExpenseServiceImpl expenseService;
 	
 	@Mock
 	PersonRepository personRepository;
@@ -37,7 +39,7 @@ class AccountServiceImplTest {
 	
 	@BeforeEach
 	public void setUp() throws Exception{
-		accountService = new AccountServiceImpl(accountRepository);
+		accountService = new AccountServiceImpl(accountRepository, expenseService, incomeService);
 		personService = new PersonServiceImpl(personRepository, accountService);
 	}
 

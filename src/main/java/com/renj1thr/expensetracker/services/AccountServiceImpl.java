@@ -1,6 +1,8 @@
 package com.renj1thr.expensetracker.services;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,13 @@ import com.renj1thr.expensetracker.repositories.AccountRepository;
 public class AccountServiceImpl implements AccountService{
 	
 	public final AccountRepository accountRepository;
+	public final ExpenseService expenseService;
+	public final IncomeService incomeService;
 	
-	public AccountServiceImpl(AccountRepository accountRepository) {
+	public AccountServiceImpl(AccountRepository accountRepository, ExpenseService expenseService, IncomeService incomeService) {
 		this.accountRepository = accountRepository;
+		this.expenseService = expenseService;
+		this.incomeService = incomeService;
 	}
 	
 	@Override
@@ -33,6 +39,41 @@ public class AccountServiceImpl implements AccountService{
 		account = accountRepository.save(account);
 
 		return account;
+	}
+	
+	
+	@Override
+	public Expense addExpense(long accountId, Expense expense) {
+		
+		Optional<Account> accountOptional = accountRepository.findById(accountId);
+		
+		if(!accountOptional.isPresent()) {
+			throw new RuntimeException("Account Not Found!");
+		
+		}
+		Account account = accountOptional.get();
+		
+		expense = expenseService.addExpense(account, expense);
+	
+		return expense;
+	}
+	
+	@Override
+	public List<Expense> getExpenses(long accountId) {
+		
+		Optional<Account> accountOptional = accountRepository.findById(accountId);
+		
+		if(!accountOptional.isPresent()) {
+			throw new RuntimeException("Account Not Found!");
+		
+		}
+		Account account = accountOptional.get();
+		
+		return account.getExpenses();
 		
 	}
+	
+	
+	
+	
 }
