@@ -45,7 +45,9 @@ class PersonServiceImplTest {
 
 	@Test
 	public void getPersonById() {
-		Person person = new Person();
+		Person person = Person.builder()
+				.id(1L)
+				.build();
 		person.setId(1L);
 		Optional<Person> personOptional = Optional.of(person);
 		
@@ -63,8 +65,12 @@ class PersonServiceImplTest {
 	public void getPersons() {
 		
 		List<Person> persons = new ArrayList<Person>();
-		Person person1 = new Person();
-		Person person2 = new Person();
+		Person person1 = Person.builder()
+				.id(1L)
+				.build();
+		Person person2 = Person.builder()
+				.id(2L)
+				.build();
 		persons.add(person1);
 		persons.add(person2);
 		

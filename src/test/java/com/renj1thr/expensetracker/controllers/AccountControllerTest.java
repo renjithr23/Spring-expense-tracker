@@ -59,8 +59,9 @@ public class AccountControllerTest {
 	@Test
 	public void testGetExpenses() throws Exception{
 //		given 
-		Account account = new Account();
-		account.setId(1L);
+		Account account = Account.builder()
+				.id(1L)
+				.build();
 		Expense expense1 = new Expense();
 		expense1.setId(1L);
 		expense1.setAmount(200);

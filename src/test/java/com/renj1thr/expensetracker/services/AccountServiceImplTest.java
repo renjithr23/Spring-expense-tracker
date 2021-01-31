@@ -48,15 +48,21 @@ class AccountServiceImplTest {
 		
 //		Given
 		
-		Person person = new Person();
-		person.setId(1L);
+		Person person = Person.builder()
+				.id(1L)
+				.build();
 		Set<Account> accounts = new HashSet<Account>();
-		Account account1 = new Account();
-		account1.setId(1L);
-		accounts.add(account1);
-		Account account2 = new Account();
-		account2.setId(2L);
+		
+		Account account1 = Account.builder()
+				.id(1L)
+				.build();
+		Account account2 = Account.builder()
+				.id(2L)
+				.build();
+		
 		accounts.add(account2);
+		accounts.add(account1);
+		
 		person.setAccounts(accounts);
 
 		Optional<Person> personOptional = Optional.of(person);

@@ -63,8 +63,9 @@ public class PersonControllerTest {
 	@Test
 	public void testGetPerson() throws Exception {
 //		given
-		Person person = new Person();
-		person.setId(1L);
+		Person person = Person.builder()
+				.id(1L)
+				.build();
 		Optional<Person> personOptional = Optional.of(person);
 		
 //		when 
@@ -80,19 +81,23 @@ public class PersonControllerTest {
 	@Test
 	public void testGetAccounts() throws Exception {
 //		given
-		Person person = new Person();
-		person.setId(1L);
-		Account account1 = new Account();
-		account1.setId(1L);
-		account1.setBalance(0);
-		account1.setName("account1");
-		account1.setType("type1");
+		Person person = Person.builder()
+				.id(1L)
+				.build();
 		
-		Account account2 = new Account();
-		account2.setId(2L);
-		account2.setBalance(0);
-		account2.setName("account2");
-		account1.setType("type2");
+		Account account1 = Account.builder()
+				.id(1L)
+				.name("account1")
+				.type("type1")
+				.balance(0)
+				.build();
+		
+		Account account2 = Account.builder()
+				.id(2L)
+				.name("account2")
+				.type("type2")
+				.balance(0)
+				.build();
 		
 		Set<Account> accountSet = new HashSet<Account>();
 		accountSet.add(account2);

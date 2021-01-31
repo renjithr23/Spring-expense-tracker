@@ -41,20 +41,23 @@ public class PersonBootstrap implements ApplicationListener<ContextRefreshedEven
 
 		List<Account> generated_accounts = getAccounts();
 		
-		Person person1 = new Person();
-		person1.setFirstName("Renjith");
-		person1.setLastName("Ramesh");
 		Set<Account> p1AccountSet = new HashSet<Account>();
 		p1AccountSet.add(generated_accounts.get(0));
-		person1.setAccounts(p1AccountSet);
 		
-		Person person2 = new Person();
-		person2.setFirstName("Rakesh");
-		person2.setLastName("Sharma");
 		Set<Account> p2AccountSet = new HashSet<Account>();
 		p2AccountSet.add(generated_accounts.get(1));
-		person2.setAccounts(p2AccountSet);
 		
+		Person person1 = Person.builder()
+				.firstName("Renjith")
+				.lastName("Ramesh")
+				.accounts(p1AccountSet)
+				.build();
+		
+		Person person2 = Person.builder()
+				.firstName("Rakesh")
+				.lastName("Sharma")
+				.accounts(p2AccountSet)
+				.build();
 		
 		bootstrap_persons.add(person2);
 		bootstrap_persons.add(person1);
@@ -66,23 +69,25 @@ public class PersonBootstrap implements ApplicationListener<ContextRefreshedEven
 		
 		List<Account> bootstrap_accounts = new ArrayList<>(2);
 		
-		Account hdfc_account = new Account();
-		hdfc_account.setBalance(1000.00);
-		hdfc_account.setDescription("Salary Account");
-		hdfc_account.setName("HDFC_SALARY");
-		hdfc_account.setType("SALARY");
+		Account hdfc_account = Account.builder()
+				.balance(1000.00)
+				.description("Salary Account")
+				.name("HDFC_SALARY")
+				.type("SALARY")
+				.build();
+			
 		
 		hdfc_account.setExpenses(getExpenses());
 		hdfc_account.setIncomes(getIncomes());
 		
 		bootstrap_accounts.add(hdfc_account);
 		
-		
-		Account sbi_account = new Account();
-		sbi_account.setBalance(100000.00);
-		sbi_account.setDescription("Savings Account");
-		sbi_account.setName("SBI_SAVINGS");
-		sbi_account.setType("SAVINGS");
+		Account sbi_account = Account.builder()
+				.balance(100000.00)
+				.description("Savings Account")
+				.name("SBI_SAVINGS")
+				.type("SAVINGS")
+				.build();
 		
 		sbi_account.setExpenses(getExpenses());
 		sbi_account.setIncomes(getIncomes());
