@@ -10,8 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
+@Getter
+@Setter
 public class Person {
 	
 	@Id
@@ -27,28 +32,6 @@ public class Person {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private Set<Account> accounts;
 
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	} 
-	public Set<Account> getAccounts() {
-		return accounts;
-	}
 	public void setAccounts(Set<Account> accounts) {
 		accounts.iterator().forEachRemaining((account)->account.setPerson(this));
 		this.accounts = accounts;

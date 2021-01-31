@@ -12,7 +12,10 @@ import com.renj1thr.expensetracker.domains.Account;
 import com.renj1thr.expensetracker.domains.Person;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class PersonServiceImpl implements PersonService {
 	
 	private final PersonRepository personRepository;
@@ -46,6 +49,8 @@ public class PersonServiceImpl implements PersonService {
 			throw new RuntimeException("Person Not Found!");
 		}
 		
+		log.info("Person with ID " + id + " returned");
+		
 		return personOptional.get();
 	}
 	
@@ -55,6 +60,8 @@ public class PersonServiceImpl implements PersonService {
 		person.setAccounts(new HashSet<Account>());
 		
 		person = personRepository.save(person);
+		
+		log.info("Person with Id " + person.getId() + " added");
 		
 		return person;
 	}
@@ -67,6 +74,8 @@ public class PersonServiceImpl implements PersonService {
 		
 		person.getAccounts().iterator().forEachRemaining(accountList::add);
 		
+		log.info("Accounts for person " + id + " fetched");
+		
 		return accountList;
 	}
 	
@@ -75,6 +84,8 @@ public class PersonServiceImpl implements PersonService {
 		Person person = this.getPersonById(id);
 		
 		account = accountService.addAccount(account, person);
+		
+		log.info("Accounts " + account.getId() + "added for person " + id );
 		
 		return account; 
 		

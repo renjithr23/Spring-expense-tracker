@@ -12,7 +12,10 @@ import com.renj1thr.expensetracker.domains.Income;
 import com.renj1thr.expensetracker.domains.Person;
 import com.renj1thr.expensetracker.repositories.AccountRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j	
 public class AccountServiceImpl implements AccountService{
 	
 	public final AccountRepository accountRepository;
@@ -37,6 +40,8 @@ public class AccountServiceImpl implements AccountService{
 		account.setPerson(person);
 		
 		account = accountRepository.save(account);
+		
+		log.info("Account " + account.getId() + " is added");
 
 		return account;
 	}
@@ -54,6 +59,8 @@ public class AccountServiceImpl implements AccountService{
 		Account account = accountOptional.get();
 		
 		expense = expenseService.addExpense(account, expense);
+		
+		log.info("Expense " + expense.getId() + " is added");
 	
 		return expense;
 	}
@@ -68,6 +75,8 @@ public class AccountServiceImpl implements AccountService{
 		
 		}
 		Account account = accountOptional.get();
+		
+		log.info("Expenses for account " + accountId + " fetched");
 		
 		return account.getExpenses();
 		

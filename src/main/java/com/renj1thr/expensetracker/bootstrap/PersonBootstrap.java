@@ -16,7 +16,10 @@ import com.renj1thr.expensetracker.domains.Income;
 import com.renj1thr.expensetracker.domains.Person;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class PersonBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	
 	public final PersonRepository personRepository;
@@ -30,7 +33,7 @@ public class PersonBootstrap implements ApplicationListener<ContextRefreshedEven
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         this.personRepository.saveAll(getPersons());
-        System.out.println("Bootstrap People Saved to Database");
+        log.info("Bootstrap People Saved to Database");
     }
 	
 	public List<Person> getPersons() {
