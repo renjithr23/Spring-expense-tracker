@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.renj1thr.expensetracker.domains.Account;
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.exceptions.NotFoundException;
 import com.renj1thr.expensetracker.services.PersonService;
 
 @RestController
@@ -30,7 +31,7 @@ public class PersonController {
 	
 	@GetMapping
 	@RequestMapping(method = RequestMethod.GET, value = "/getPerson/{id}")
-	public Person getPersonById(@PathVariable("id") long id){
+	public Person getPersonById(@PathVariable("id") long id) throws NotFoundException {
 		return this.personService.getPersonById(id);
 	}
 	

@@ -10,6 +10,7 @@ import com.renj1thr.expensetracker.domains.Account;
 import com.renj1thr.expensetracker.domains.Expense;
 import com.renj1thr.expensetracker.domains.Income;
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.exceptions.NotFoundException;
 import com.renj1thr.expensetracker.repositories.AccountRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +54,8 @@ public class AccountServiceImpl implements AccountService{
 		Optional<Account> accountOptional = accountRepository.findById(accountId);
 		
 		if(!accountOptional.isPresent()) {
-			throw new RuntimeException("Account Not Found!");
-		
+			throw new NotFoundException("Account with ID " + accountId + " not found");
+			
 		}
 		Account account = accountOptional.get();
 		

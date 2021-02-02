@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.renj1thr.expensetracker.domains.Account;
 import com.renj1thr.expensetracker.domains.Person;
+import com.renj1thr.expensetracker.exceptions.NotFoundException;
 import com.renj1thr.expensetracker.repositories.PersonRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,15 +43,14 @@ public class PersonServiceImpl implements PersonService {
 	}
 	
 	@Override
-	public Person getPersonById(long id) {
+	public Person getPersonById(long id) throws NotFoundException {
 		Optional<Person> personOptional =  personRepository.findById(id);
 		
 		if(!personOptional.isPresent()) {
-			throw new RuntimeException("Person Not Found!");
+			throw new NotFoundException("Person with ID " + id + " not found");
 		}
 		
 		log.info("Person with ID " + id + " returned");
-		
 		return personOptional.get();
 	}
 	
