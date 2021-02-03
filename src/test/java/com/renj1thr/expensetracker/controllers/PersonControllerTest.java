@@ -107,7 +107,7 @@ public class PersonControllerTest {
 		Optional<Person> personOptional = Optional.of(person);
 		
 //		when 
-		when(personRepository.findById(anyLong())).thenReturn(personOptional);
+		when(personRepository.findById(1L)).thenReturn(personOptional);
 		
 		
 //		then 
@@ -117,6 +117,10 @@ public class PersonControllerTest {
 		
 		verify(personRepository, times(1)).findById(anyLong());
 		verify(personRepository, never()).findAll();
+		
+		
+		mockMvc.perform(get("/person/3/accounts"))
+			.andExpect(status().isNotFound());
 		
 	}
 	

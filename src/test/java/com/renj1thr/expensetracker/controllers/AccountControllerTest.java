@@ -83,6 +83,39 @@ public class AccountControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(content().string(containsString("id")))
 			.andExpect(content().string(containsString("amount")));
+	}
+	
+	@Test
+	public void testGetExpensesException() throws Exception{
+//		given 
+		Account account = Account.builder()
+				.id(1L)
+				.build();
+		Expense expense1 = new Expense();
+		expense1.setId(1L);
+		expense1.setAmount(200);
+		Expense expense2 = new Expense();
+		expense2.setId(1L);
+		expense2.setAmount(300);
+		List<Expense> expenses = new ArrayList<Expense>();
+		expenses.add(expense1);
+		expenses.add(expense2);
+		account.setExpenses(expenses);
+		
+		Optional<Account> accountOptional = Optional.of(account);
+		
+//		When 
+		when(accountRepository.findById(1L)).thenReturn(accountOptional);
+		
+//		then 
+		mockMvc.perform(get("/account/1/expenses"))
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString("id")))
+			.andExpect(content().string(containsString("amount")));
+		
+
+		mockMvc.perform(get("/account/3/expenses"))
+			.andExpect(status().isNotFound());
 		
 	}
 	

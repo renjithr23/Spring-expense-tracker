@@ -72,7 +72,8 @@ public class AccountServiceImpl implements AccountService{
 		Optional<Account> accountOptional = accountRepository.findById(accountId);
 		
 		if(!accountOptional.isPresent()) {
-			throw new RuntimeException("Account Not Found!");
+			
+			throw new NotFoundException("Account with ID " + accountId + " not found");
 		
 		}
 		Account account = accountOptional.get();
