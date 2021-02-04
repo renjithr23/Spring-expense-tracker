@@ -41,7 +41,6 @@ public class AccountServiceImpl implements AccountService{
 		account.setPerson(person);
 		
 		account = accountRepository.save(account);
-		
 		log.info("Account " + account.getId() + " is added");
 
 		return account;
@@ -57,12 +56,11 @@ public class AccountServiceImpl implements AccountService{
 			throw new NotFoundException("Account with ID " + accountId + " not found");
 			
 		}
+		
 		Account account = accountOptional.get();
-		
 		expense = expenseService.addExpense(account, expense);
-		
 		log.info("Expense " + expense.getId() + " is added");
-	
+		
 		return expense;
 	}
 	
@@ -72,19 +70,47 @@ public class AccountServiceImpl implements AccountService{
 		Optional<Account> accountOptional = accountRepository.findById(accountId);
 		
 		if(!accountOptional.isPresent()) {
-			
 			throw new NotFoundException("Account with ID " + accountId + " not found");
-		
 		}
-		Account account = accountOptional.get();
 		
-		log.info("Expenses for account " + accountId + " fetched");
+		Account account = accountOptional.get();
+		log.info("Income for account " + accountId + " fetched");
 		
 		return account.getExpenses();
+	}
+	
+
+	@Override
+	public Income addIncome(long accountId, Income income) {
+		
+		Optional<Account> accountOptional = accountRepository.findById(accountId);
+		
+		if(!accountOptional.isPresent()) {
+			throw new NotFoundException("Account with ID " + accountId + " not found");
+		}
+
+		Account account = accountOptional.get();
+		income = incomeService.addIncome(account, income);
+		log.info("Income " + income.getId() + " is added");
+		
+		return income;
 		
 	}
 	
-	
-	
+	@Override
+	public List<Income> getIncomes(long accountId) {
+		
+		Optional<Account> accountOptional = accountRepository.findById(accountId);
+		
+		if(!accountOptional.isPresent()) {
+			throw new NotFoundException("Account with ID " + accountId + " not found");
+		}
+		
+		Account account = accountOptional.get();
+		log.info("Incomes for account " + accountId + " fetched");
+		
+		return account.getIncomes();
+		
+	}
 	
 }

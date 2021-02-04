@@ -50,14 +50,15 @@ public class PersonBootstrap implements ApplicationListener<ContextRefreshedEven
 		Person person1 = Person.builder()
 				.firstName("Renjith")
 				.lastName("Ramesh")
-				.accounts(p1AccountSet)
 				.build();
 		
 		Person person2 = Person.builder()
 				.firstName("Rakesh")
 				.lastName("Sharma")
-				.accounts(p2AccountSet)
 				.build();
+		
+		person1.setAccounts(p1AccountSet);
+		person2.setAccounts(p2AccountSet);
 		
 		bootstrap_persons.add(person2);
 		bootstrap_persons.add(person1);
