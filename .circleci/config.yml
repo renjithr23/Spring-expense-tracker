@@ -2,8 +2,18 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
+  codecov: codecov/codecov@1.0.2
+
+jobs:
+  generate_coverage:
+    Steps:
+      - codecov/upload:
+          file: {{ target/surefire-reports }}
 
 workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
+      - generate_coverage:
+          requires:
+            - maven/test
