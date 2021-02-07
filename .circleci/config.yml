@@ -15,7 +15,8 @@ jobs:
 workflows:
   maven_test:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - maven/test:
+          command: cobertura:cobertura
       - generate_coverage:
           requires:
             - maven/test
