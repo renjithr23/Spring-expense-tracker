@@ -17,6 +17,7 @@ workflows:
     jobs:
       - maven/test:
           command: cobertura:cobertura
+          test_results_path: /home/circleci/project/target/surefire-reports
       - generate_coverage:
           requires:
             - maven/test
