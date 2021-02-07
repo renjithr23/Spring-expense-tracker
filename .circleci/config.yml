@@ -6,7 +6,7 @@ orbs:
 
 jobs:
   generate_coverage:
-    Steps:
+    steps:
       - codecov/upload:
           file: {{ target/surefire-reports }}
 
