@@ -6,9 +6,11 @@ orbs:
 
 jobs:
   generate_coverage:
+    docker: 
+      - image: circleci/openjdk:8-jdk
     steps:
       - codecov/upload:
-          file: {{ target/surefire-reports }}
+          file: target/surefire-reports 
 
 workflows:
   maven_test:
