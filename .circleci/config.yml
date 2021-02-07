@@ -10,7 +10,7 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - codecov/upload:
-          file: target/surefire-reports 
+          file: /home/circleci/project/target/surefire-reports
 
 workflows:
   maven_test:
