@@ -8,22 +8,20 @@ import com.renj1thr.expensetracker.repositories.ExpenseRepository;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
-	
-	public final ExpenseRepository expenseRepository;
 
-	public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
-		this.expenseRepository = expenseRepository;
-	}
+  public final ExpenseRepository expenseRepository;
 
-	@Override
-	public Expense addExpense(Account account, Expense expense) {
-		
-		if(expense.getAmount() < 0) expense.setAmount(0);
-		expense.setAccount(account);
-		expense = expenseRepository.save(expense);
-		
-		return expense;
-		
-	}
-	
+  public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
+    this.expenseRepository = expenseRepository;
+  }
+
+  @Override
+  public Expense addExpense(Account account, Expense expense) {
+
+    if (expense.getAmount() < 0) expense.setAmount(0);
+    expense.setAccount(account);
+    expense = expenseRepository.save(expense);
+
+    return expense;
+  }
 }

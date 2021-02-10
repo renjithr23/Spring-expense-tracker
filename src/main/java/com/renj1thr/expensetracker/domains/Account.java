@@ -27,45 +27,43 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class Account {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Builder.Default
-	private double balance = 0;
-	
-	@NotBlank(message = "The name for an Account should not be blank")
-	private String name;
-	private String description;
-	
-	@NotBlank(message = "The Type for an Account should not be blank")
-	private String type;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private List<Income> incomes;
-	
-	@ManyToOne
-	@JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")
-	@JsonBackReference
-	private Person person;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private List<Expense> expenses;
 
-	public void setIncomes(List<Income> incomes) {
-		for(Income income : incomes) {
-			income.setAccount(this);
-		}
-		this.incomes = incomes;
-	}
-	
-	public void setExpenses(List<Expense> expenses) {
-		for(Expense expense : expenses) {
-			expense.setAccount(this);
-		}
-		this.expenses = expenses;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
+  @Builder.Default private double balance = 0;
 
+  @NotBlank(message = "The name for an Account should not be blank")
+  private String name;
+
+  private String description;
+
+  @NotBlank(message = "The Type for an Account should not be blank")
+  private String type;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+  private List<Income> incomes;
+
+  @ManyToOne
+  @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")
+  @JsonBackReference
+  private Person person;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+  private List<Expense> expenses;
+
+  public void setIncomes(List<Income> incomes) {
+    for (Income income : incomes) {
+      income.setAccount(this);
+    }
+    this.incomes = incomes;
+  }
+
+  public void setExpenses(List<Expense> expenses) {
+    for (Expense expense : expenses) {
+      expense.setAccount(this);
+    }
+    this.expenses = expenses;
+  }
 }

@@ -8,19 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.renj1thr.expensetracker.domains.Person;
 import com.renj1thr.expensetracker.services.PersonService;
 
-
 @RestController
 public class IndexController {
-	
-	private final PersonService personService;
-	
-	public IndexController(PersonService personService) {
-		this.personService = personService;
-	}
 
-	@RequestMapping({"","/","/index"})
-	public Set<Person> getAll(){
-		return this.personService.getPerson();
-	}
-	
+  private final PersonService personService;
+
+  public IndexController(PersonService personService) {
+    this.personService = personService;
+  }
+
+  @RequestMapping({"", "/", "/index"})
+  public Set<Person> getAll() {
+    return this.personService.getPerson();
+  }
 }

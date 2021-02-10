@@ -5,21 +5,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {
-	
-	static final long serialVersionUID = 1;
 
-    public NotFoundException() {
-        super();
-    }
+  static final long serialVersionUID = 1;
 
-    public NotFoundException(String message) {
-        super(message);
-    }
+  public NotFoundException() {
+    super();
+  }
 
-    public NotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public NotFoundException(String message) {
+    super(message);
+  }
 
+  public NotFoundException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }
-
-

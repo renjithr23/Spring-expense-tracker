@@ -16,34 +16,33 @@ import com.renj1thr.expensetracker.services.PersonService;
 
 @RestController
 public class PersonController {
-	
-	private final PersonService personService;
-	
-	public PersonController(PersonService personService) {
-		this.personService = personService;
-	}
 
-	@GetMapping
-	@RequestMapping("/getPersons")
-	public List<Person> getAll(){
-		return this.personService.getPersons();
-	}
-	
-	@GetMapping
-	@RequestMapping(method = RequestMethod.GET, value = "/getPerson/{id}")
-	public Person getPersonById(@PathVariable("id") long id) throws NotFoundException {
-		return this.personService.getPersonById(id);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/addPerson")
-	public Person addPerson(@RequestBody Person person) {
-		return this.personService.addPerson(person);
-	}
-	
-	@GetMapping
-	@RequestMapping("/person/{id}/accounts")
-	public List<Account> getAccounts(@PathVariable("id") long id){
-		return this.personService.getAccounts(id);
-	}
-	
+  private final PersonService personService;
+
+  public PersonController(PersonService personService) {
+    this.personService = personService;
+  }
+
+  @GetMapping
+  @RequestMapping("/getPersons")
+  public List<Person> getAll() {
+    return this.personService.getPersons();
+  }
+
+  @GetMapping
+  @RequestMapping(method = RequestMethod.GET, value = "/getPerson/{id}")
+  public Person getPersonById(@PathVariable("id") long id) throws NotFoundException {
+    return this.personService.getPersonById(id);
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "/addPerson")
+  public Person addPerson(@RequestBody Person person) {
+    return this.personService.addPerson(person);
+  }
+
+  @GetMapping
+  @RequestMapping("/person/{id}/accounts")
+  public List<Account> getAccounts(@PathVariable("id") long id) {
+    return this.personService.getAccounts(id);
+  }
 }

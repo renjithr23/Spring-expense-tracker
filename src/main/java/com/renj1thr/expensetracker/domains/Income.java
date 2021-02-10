@@ -17,20 +17,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Income {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull(message = "A Valid Amount for Income should be present")
-	private double amount;
-	private String description; 
-	@NotNull(message = "The Valid Type for Income should be present")
-	private String type;
-	
-	@ManyToOne
-	@JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
-	@JsonBackReference
-	private Account account;
-	
-	
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotNull(message = "A Valid Amount for Income should be present")
+  private double amount;
+
+  private String description;
+
+  @NotNull(message = "The Valid Type for Income should be present")
+  private String type;
+
+  @ManyToOne
+  @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
+  @JsonBackReference
+  private Account account;
 }
