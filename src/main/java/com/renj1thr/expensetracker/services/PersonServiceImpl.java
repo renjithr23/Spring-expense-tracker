@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.renj1thr.expensetracker.domains.Account;
@@ -64,6 +65,19 @@ public class PersonServiceImpl implements PersonService {
     log.info("Person with Id " + person.getId() + " added");
 
     return person;
+  }
+
+  @Override
+  public String deletePerson(long id) {
+
+    try {
+      personRepository.deleteById(id);
+    } catch (EmptyResultDataAccessException ex) {
+      throw new NotFoundException("Person with ID " + id + " not found");
+    }
+    log.info("Person with ID " + id + " deleted");
+
+    return "Person Deleted Successfully";
   }
 
   @Override

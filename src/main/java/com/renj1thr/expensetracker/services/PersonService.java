@@ -18,4 +18,6 @@ public interface PersonService {
   Account addAccount(Account account, long id);
 
   List<Account> getAccounts(long id);
+
+  String deletePerson(long id);
 }

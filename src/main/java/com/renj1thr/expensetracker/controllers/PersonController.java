@@ -1,7 +1,11 @@
 package com.renj1thr.expensetracker.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,5 +48,14 @@ public class PersonController {
   @RequestMapping("/person/{id}/accounts")
   public List<Account> getAccounts(@PathVariable("id") long id) {
     return this.personService.getAccounts(id);
+  }
+
+  @DeleteMapping
+  @RequestMapping("/person/{id}")
+  public ResponseEntity<?> deletePerson(@PathVariable("id") long id) {
+    Map<String, String> result = new HashMap<>();
+    result.put("message", this.personService.deletePerson(id));
+
+    return ResponseEntity.ok().body(result);
   }
 }

@@ -27,7 +27,7 @@ public class ExceptionControllerHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
-    log.error("Handling Number Format Exception");
+    log.error("Handling Validation Exception");
     log.error(ex.getMessage());
 
     Map<String, String> errors = new HashMap<>();
@@ -49,7 +49,7 @@ public class ExceptionControllerHandler {
   @ExceptionHandler(NotFoundException.class)
   public ResponseEntity<?> handleNotFoundExceptions(NotFoundException ex) {
 
-    log.error("Handling Number Format Exception");
+    log.error("Handling Not Found Exception");
     log.error(ex.getMessage());
 
     Map<String, String> errors = new HashMap<>();
