@@ -28,18 +28,18 @@ public class PersonController {
   }
 
   @GetMapping
-  @RequestMapping("/getPersons")
+  @RequestMapping("/persons")
   public List<Person> getAll() {
     return this.personService.getPersons();
   }
 
   @GetMapping
-  @RequestMapping(method = RequestMethod.GET, value = "/getPerson/{id}")
+  @RequestMapping(method = RequestMethod.GET, value = "/person/{id}")
   public Person getPersonById(@PathVariable("id") long id) throws NotFoundException {
     return this.personService.getPersonById(id);
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/addPerson")
+  @RequestMapping(method = RequestMethod.POST, value = "/persons")
   public Person addPerson(@RequestBody Person person) {
     return this.personService.addPerson(person);
   }

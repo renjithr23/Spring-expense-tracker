@@ -68,7 +68,7 @@ public class PersonControllerTest {
 
     //		then
     mockMvc
-        .perform(get("/getPerson/1"))
+        .perform(get("/person/1"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("id")));
   }
