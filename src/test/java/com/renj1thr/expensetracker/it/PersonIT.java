@@ -63,7 +63,7 @@ public class PersonIT {
 
     this.mockMvc
         .perform(post("/persons").contentType("application/json").content(request_body))
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(content().json(expected_response));
 
@@ -79,7 +79,7 @@ public class PersonIT {
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(content().json(response_after_adding));
 
-    this.mockMvc.perform(delete("/person/3")).andExpect(status().isOk());
+    this.mockMvc.perform(delete("/person/3")).andExpect(status().isAccepted());
 
     this.mockMvc
         .perform(get("/persons"))

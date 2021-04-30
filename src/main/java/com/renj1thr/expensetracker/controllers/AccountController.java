@@ -29,34 +29,30 @@ public class AccountController {
   }
 
   @PostMapping
-  @RequestMapping("/person/{id}/accounts/add")
+  @RequestMapping("/person/{id}/accounts")
   public ResponseEntity<Account> addAccount(
       @Valid @RequestBody Account account, @PathVariable("id") long accountId) {
     return ResponseEntity.ok(this.personService.addAccount(account, accountId));
   }
 
-  @PostMapping
-  @RequestMapping("/account/{id}/expenses/add")
+  @PostMapping("/account/{id}/expenses")
   public ResponseEntity<Expense> addExpense(
       @Valid @RequestBody Expense expense, @PathVariable("id") long accountId) {
     return ResponseEntity.ok(this.accountService.addExpense(accountId, expense));
   }
 
-  @GetMapping
-  @RequestMapping("/account/{id}/expenses")
+  @GetMapping("/account/{id}/expenses")
   public ResponseEntity<List<Expense>> getExpenses(@PathVariable("id") long accountId) {
     return ResponseEntity.ok(this.accountService.getExpenses(accountId));
   }
 
-  @PostMapping
-  @RequestMapping("/account/{id}/incomes/add")
+  @PostMapping("/account/{id}/incomes")
   public ResponseEntity<Income> addIncome(
       @Valid @RequestBody Income income, @PathVariable("id") long accountId) {
     return ResponseEntity.ok(this.accountService.addIncome(accountId, income));
   }
 
-  @GetMapping
-  @RequestMapping("/account/{id}/incomes")
+  @GetMapping("/account/{id}/incomes")
   public ResponseEntity<List<Income>> getIncomes(@PathVariable("id") long accountId) {
     return ResponseEntity.ok(this.accountService.getIncomes(accountId));
   }
